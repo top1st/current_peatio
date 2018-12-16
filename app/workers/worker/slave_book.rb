@@ -81,7 +81,7 @@ module Worker
     end
 
     def get_depth(market_id, side)
-      Order.where(market_id: market_id, state: 'wait', type: "Order#{side}", ord_type: 'limit')
+      Order.where(market_id: market_id, state: 'wait', type: "Order#{side.to_s.camelize}", ord_type: 'limit')
            .group(:price)
            .sum(:volume)
            .to_a
